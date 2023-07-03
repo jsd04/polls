@@ -74,6 +74,15 @@ class IndexView(generic.ListView):
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[
             :5
         ]
+    """
+    """
+def signup(request):
+        title='index'
+        return render(request, "polls/administradores/signup.html",{
+            'mytitle':title,
+            'form':UserCreationForm
+        } )        
+   #return render(request, "polls/signin.html",
 
 
 class DetailView(generic.DetailView):
@@ -130,7 +139,7 @@ def vote(request, question_id):
 def loggin(request):
    # return HttpResponse('<h1>hello world<h1>')
     title='helloworld'
-    return render(request, "signup.html",{
+    return render(request, "admin/login.html",{
         'mytitle':title,
         'form':UserCreationForm
     } )
