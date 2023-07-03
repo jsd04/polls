@@ -57,7 +57,8 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.template import loader
-
+#creatiionform
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import Choice, Question
 
@@ -126,3 +127,13 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
     #return HttpResponse("You're voting on question %s." % question_id)
 
+def loggin(request):
+   # return HttpResponse('<h1>hello world<h1>')
+    title='helloworld'
+    return render(request, "signup.html",{
+        'mytitle':title,
+        'form':UserCreationForm
+    } )
+        
+        
+    

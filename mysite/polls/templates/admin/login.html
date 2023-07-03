@@ -1,7 +1,7 @@
-{% extends "admin/base_site.html" %}
+{% extends "C:\Users\jsanchezd01\Documents\GitHub\polls\mysite\polls\templates\admin\base_site.html" %}
 {% load i18n static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/login.css" %}">
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{C:\Users\jsanchezd01\Documents\GitHub\polls\mysite\polls\static\admin\css\login.css %}">
 {{ form.media }}
 {% endblock %}
 
@@ -63,6 +63,15 @@
     <input type="submit" value="{% translate 'Log in' %}">
   </div>
 </form>
+<div class="submit-row2">
+  <a class="btn btn-outline-info" href="/administradores/signup">
+      Registrarse
+      <i class="material-icons right">edit_note</i>
+  </a>
+</div>
+<div class="submit-row">
+  <input type="submit" value="{% translate 'Registrarse' %}">
+</div>
 
 </div>
 {% endblock %}

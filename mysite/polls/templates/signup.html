@@ -1,0 +1,16 @@
+<h1>Signup</h1>
+<!-- {{form}}-->
+<form action="/polls/signup/" method="POST">
+    {% csrf_token %} 
+    {{form.as_p}}
+    {{mytitle}}
+    <button>
+        resp
+    </button>
+    <div class="col s6 center">
+        <a class="btn btn-outline-info" href="/administradores/signup">
+            Registrarse
+            <i class="material-icons right">edit_note</i>
+        </a>
+    </div>
+</form>
