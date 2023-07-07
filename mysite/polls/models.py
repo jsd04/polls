@@ -5,6 +5,39 @@ from django.utils import timezone
 
 
 from django.contrib import admin
+#from django.contrib.auth.models import User
+
+
+class UsuarioInquilo(models.Model):
+    username = models.CharField(max_length=30)
+ #   user = models.ForeignKey(User)
+    curp = models.CharField(max_length=30)
+     #domicilio
+    piso = models.IntegerField()
+     # type: Number,
+    departamento = models.IntegerField()
+     # type: Number,
+    telefono = models.IntegerField()
+     # type: String,
+    correo = models.CharField(max_length=30)
+    #  type: String,
+    created = models.DateTimeField(auto_now_add=True)
+
+class UsuarioVisitante(models.Model):
+    nombre = models.CharField(max_length=30)
+ #   user = models.ForeignKey(User)
+    curp = models.CharField(max_length=30)
+     # type: Number,
+    telefono = models.IntegerField()
+     # type: String,
+    correo = models.CharField(max_length=30)
+    #  type: String,
+    created = models.DateTimeField(auto_now_add=True)
+    #inquilino a visitar
+    nombre_inquilino = models.CharField(max_length=30)
+     # type: Number,
+    parentesco = models.CharField(max_length=30)
+    
 
 
 class Question(models.Model):
@@ -13,20 +46,15 @@ class Question(models.Model):
     pub_date = models.DateTimeField("date published")
     def __str__(self):
         return self.question_text
-    
     @admin.display(
         boolean=True,
         ordering="pub_date",
         description="Published recently?",
     )
-    
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
-    """
-    def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
-    """
+  
     
     
 

@@ -52,13 +52,17 @@ def vote(request, question_id):
     """
 
 from django.http import HttpResponseRedirect,HttpResponse, Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.template import loader
 #creatiionform
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.db import IntegrityError
+from django.contrib.auth.decorators import login_required
 
 from .models import Choice, Question
 
@@ -77,12 +81,74 @@ class IndexView(generic.ListView):
     """
     """
 def signup(request):
-        title='index'
-        return render(request, "polls/administradores/signup.html",{
-            'mytitle':title,
-            'form':UserCreationForm
-        } )        
+        if request.method == 'GET':
+            print('enviando formulario')
+            title='Registrar'
+            return render(request, "polls/signup.html",{
+                'mytitle':title,
+                'form':UserCreationForm
+            } ) 
+        else:
+             if request.POST["password1"] == request.POST["password2"]:
+                  #register user
+                  try:
+                    user = User.objects.create_user(username=request.POST["username"],
+                                                   password=request.POST["password1"])
+                    user.save()
+                    login(request, user)
+                    return redirect('/polls/principal/')
+                   # return HttpResponse('User creado satisfactoriamente')        
+                  except IntegrityError:
+                       return render(request, "polls/signup.html",{
+                            'error': 'El user ya existe',
+                            'form':UserCreationForm
+                        } ) 
+             return render(request, "polls/signup.html",{
+                            'error': 'Passwords no coinciden',
+                            'form':UserCreationForm
+                        } )   
+ 
+
    #return render(request, "polls/signin.html",
+def signin(request):
+         if request.method == "GET":
+            title='Iniciar sesion'
+            return render(request, "polls/signin.html",{
+                'mytitle':title,
+                'form':AuthenticationForm
+            } )        
+         else:
+              user = authenticate( request, username=request.POST['username'], password=request.POST['password'])
+              if user is None:
+                return render(request, 'polls/signin.html',{
+                    'error': "usuario o password es incorrecto.",
+                    'form': AuthenticationForm
+                    })
+
+              login(request, user)
+              return redirect('/polls/principal/')
+            
+   #return render(request, "polls/signin.html",
+@login_required
+def principal(request):
+     title='Principal Administrador'
+     return render (request,"polls/principal.html",{
+          'mytitle':title
+     })
+
+
+@login_required
+def signout(request):
+     logout(request)
+     return redirect('/polls/signin/')
+
+def about(request):
+     title='About'
+     return render (request,"polls/about.html",{
+          'mytitle':title
+     })
+
+     
 
 
 class DetailView(generic.DetailView):
@@ -136,13 +202,7 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
     #return HttpResponse("You're voting on question %s." % question_id)
 
-def loggin(request):
-   # return HttpResponse('<h1>hello world<h1>')
-    title='helloworld'
-    return render(request, "admin/login.html",{
-        'mytitle':title,
-        'form':UserCreationForm
-    } )
+
         
         
     

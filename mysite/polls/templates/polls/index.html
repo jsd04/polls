@@ -1,105 +1,107 @@
-{% load static %}
+{% extends "polls/base.html" %}
 
-<link rel="stylesheet" href="{% static 'polls/style.css' %}">
-<head>
-    <title>Log in | Django site admin</title>
-    <link rel="stylesheet" href="/static/admin/css/base.css">
-    
-      <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
-      <script src="/static/admin/js/theme.js" defer=""></script>
-    
-    
-      <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
-      <script src="/static/admin/js/nav_sidebar.js" defer=""></script>
-    
-    <link rel="stylesheet" href="/static/admin/css/login.css">
-    <!--href="{C:\Users\jsanchezd01\Documents\GitHub\polls\mysite\polls\static\admin\css\login.css %}">-->
-    
-    
-    
-    
-    
-        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" href="/static/admin/css/responsive.css">
-        
-    
-    <meta name="robots" content="NONE,NOARCHIVE">
-    </head>
-
-<body class=" login" data-admin-utc-offset="0">
-    <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
-    <!-- Container -->
-    <div id="container">
+{% block content %}
+<h1>
+    hola
+</h1>
+    <main style="position: relative; overflow: hidden; width: 100%; max-width: 1600px; margin: auto; min-height: 100vh;">
+        <img src="/img/Vector3.png" alt="vector3" 
+            style="position: absolute; width: 1616px; height: 1148px; top: -800px; right: -200px; z-index: -1;"
+        >
+        <div class="row">
+            <div class="col s12 l6" style="padding: 0px 4%;">
+                <br>
+                <h1 class="header   blue-grey-text text-darken-3" 
+                    style="font-size: 3.1rem; font-weight: 500; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"
+                >
+            R & S Biométric
+                </h1>
+                <br>
+                <blockquote>
+                    <h4 style="font-size: 1.7rem; font-family:'Calibri'"
+                     >
+                     <b>
+                      Registro de información de usuarios del edificio de condominio
+                    </b> 
+                    </h4>
+                </blockquote>
+            </div>
+         <!--   <div class="col s12  l6 center">
+                <img class="d-block w-100" src="/img/logo_ipn_guinda.svg" alt="ipn_guida" height="200px" >
+            </div>  -->  
+        </div>
+        <!--   <div>
+            <img alt="" class="hide-on-small-only" src="/img/welcome.png" 
+                style="display: inline-block; width: 100%; margin: -100px auto auto;"
+            >
+        </div>-->  
+        <div class="row">
+          <!--  <div class="col-4 center">
+                 <img src="/img/upiita-logo.png" alt="logo" height="150px" >
+            </div> -->
+            <div class="col-8 center ">
+                <div class="row ">
+                    <div class="col s6 center">
+                        <a class=" active btn" href="/polls/signin">
+                            Iniciar Sesión
+                            <i class="material-icons right">send</i>
+                        </a>
+                    </div>
+                   
+                    <div class="col s6 center">
+                        <a class="btn btn-outline-info" href="/polls/signup">
+                            Registrarse
+                            <i class="material-icons right">edit_note</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                
+        </div> 
    
-        
-        <!-- Header -->
-        
-        <div id="header">
-            <div id="branding">
-            
-                <h1 id="site-name"><a href="/admin/">System R&amp;S administration</a></h1>
-                <!--
-                <h1 id="site-name"><a href="/admin/">Django administration</a></h1>
-                -->
-            </div>
+      <!--
+
+       <div class="col-4">
+            <label for="confirm_password"> Foto:</label>
+                  <a class="waves-effect waves-light text-dark btn p-2 text-center"  href="/facial"
+                       style="border-radius: 30px;" 
+                    >
+                    <i class="material-icons small rounded-circle " style="font-size:90px;"> 📷 
+                    </i> 
+                  </a> 
+    
         </div>
         
-        <!-- END Header -->
-        <div class="main" id="main">
-          <div id="content-start" class="content" tabindex="-1">
-            <!-- Content -->
-            <div id="content" class="colM">
-                <div id="content-main">
-                
-                
-                
-                <form action="/admin/login/?next=/admin/" method="post" id="login-form"><input type="hidden" name="csrfmiddlewaretoken" value="PgBCUSLMWIVg06KJA8UtEK9KRYifVoqM9uyQeWMh7UpyUPJpLec2h8PbWelVfZfT">
-                <div class="form-row">
-                    
-                    <label for="id_username" class="required">Username:</label> <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
-                </div>
-                <div class="form-row">
-                    
-                    <label for="id_password" class="required">Password:</label> <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
-                    <input type="hidden" name="next" value="/admin/">
+                <div class="col-4">
+                  <label for="confirm_password">Huella:</label>
+                  <a class="waves-effect waves-light text-dark btn p-2 text-center" href="/huella" 
+                       style="border-radius: 30px;" 
+                    >
+                    <i class="material-icons small rounded-circle " style="font-size:100px;">fingerprint
+                    </i>
+                  </a>
                 </div>
                 
-                
-                <div class="submit-row">
-                    <input type="submit" value="Log in">
-                </div>
-                </form>
-                <div class="submit-row">
-                <a class="btn btn-outline-info" href="/polls/signup">
-                <!--href="/polls/signup">--> 
-                    Registrarse
-                    <i class="material-icons right">edit_note</i>
-                </a>
-                </div>
-                <div class="submit-row">
-                <input type="submit" value="Registrarse">
-                </div>
-                
-                </div>  
-            <br class="clear">
-            </div>
-            <!-- END Content -->
-            <div id="footer"></div>
-          </div>
-        </div>
-    </div>
-    <!-- END Container -->
-    
-  
-    
-    
-
-
-
-<div class="col s6 center">
-    <a class="btn btn-outline-info" href="/polls/signup">
-        Registrarse
-        <i class="material-icons right">edit_note</i>
-    </a>
-</div>
-    </body>
+                <div class="col-4">
+                  <label for="confirm_password">Voz:</label>
+                  <a class="waves-effect waves-light text-dark btn p-2 text-center" href="/voz" 
+                       style="border-radius: 30px;" 
+                    >
+                    <i class="material-icons small rounded-circle " style="font-size:100px;">mic
+                    </i>
+                  </a>
+                </div>   
+                  
+                 
+                                      <center>
+                                        <h1>Audio Clip Recorder</h1>
+                                        <p><button id="record">Record</button></p>
+                                        <div id="sound-clip"></div>
+                                      </center>
+                                      
+                                      <script type="text/javascript" src="/biometricos/voiceMemo.js"></script>
+        <img src="/img/ellipse1.png" alt="" 
+            style="position: absolute; width: 1616px; height: 1148px; left: 100px; bottom: -900px; z-index: -1;"
+        >--> 
+    </main>
+{% endblock %}

@@ -1,22 +1,23 @@
+{% extends "polls/base.html" %}
 
+{% block content %}
 
 <head>
   <link rel="stylesheet" href="/static/admin/css/login.css">
 <link rel="stylesheet" href="/static/admin/css/responsive.css">
 </head>
-<h1>Signup2</h1>
-<!-- {{form}}-->
+<h1>
+  {{mytitle}}
+</h1>
+{{error}}
+<!-- <form action="/polls/signup/" method="POST">
+  {% csrf_token %} 
+  {{form.as_p}}
 
-<form action="/polls/signup/" method="POST">
-    {% csrf_token %} 
-    {{form.as_p}}
-    {{mytitle}}
-    <button>
-        resp
-    </button>
-    
-</form>
-<div class="row">
+
+      <button class="btn btn-primary">Signup</button>
+    </form> -->
+
     <div class="col-md-7 mx-auto">
       <div class="card mt-5 bg-success text-white rounded" style="--bs-bg-opacity: .7;">
         <div class="card-header pt-5">
@@ -30,13 +31,14 @@
           alt="Logo"
         />
         <div class="card-body">
-          <form action="/administradores/signup" method="POST" enctype="multipart/form-data">
+          <form action="/polls/signup/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
             <div class="mb-3">
-              <label for="name">Nombre:</label>
+              <label for="username">Nombre:</label>
               <input
                 type="text"
                 class="form-control bg-white text-dark "
-                name="name"
+                name="username"
                 placeholder="Nombre Apellido Paterno Apellido Marterno"
                 autofocus
               />
@@ -70,47 +72,44 @@
               ></textarea>
             </div>    
             <div class="mb-3">
-              
-              <!--La contraseña debe cumplir los siguientes requerimientos:
+              La contraseña debe cumplir los siguientes requerimientos:
               <br>*Al menos una letra
               <br>*Al menos una letra mayúscula
               <br>*Al menos un número
               <br>*Al menos 8 carácteres
-              <br>-->
-              <label for="password">Password:</label>
+              <br>
+             <label for="password1">Password:</label> 
               <input
                 type="password"
                 class="form-control bg-white text-dark "
-                name="password"
+                name="password1"
                 placeholder="Password"
                 value="{{password}}"
               />
             </div>
             <div class="mb-3">
-              <label for="confirm_password">Confirmar Password:</label>
+              <label for="password2">Confirmar Password:</label>
               <input
                 type="password"
                 class="form-control bg-white text-dark"
-                name="confirm_password"
+                name="password2"
                 placeholder="Confirmación de Password"
                 value="{{confirm_password}}"
               />
-            </div>
-            <h4 class="text-dark">Datos Biométricos</h4>
+            </div> 
+
+            <!--
+             <h4 class="text-dark">Datos Biométricos</h4>
             <div class="row text-center">
               <div class="col-4">
                 <label for="confirm_password"> Foto:</label>
-                <!-- Button trigger modal  -->
                 <a class="waves-effect waves-light text-dark btn p-2 text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                      style="border-radius: 30px;" 
                   >
                   <i class="material-icons small rounded-circle " style="font-size:90px;"> 📷 
                   </i> 
-                  <!-- photo_camera -->                     
                 </a>
               </div>
-  
-              <!-- Modal Camara -->
               <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content text-dark">
@@ -139,9 +138,7 @@
   
   
                     <div class="modal-footer bg-success" style="--bs-bg-opacity: .5;">
-                      <!--button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button-->
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="document.body.removeChild(document.querySelector('img'))">Aceptar</button>
-  
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="document.body.removeChild(document.querySelector('img'))">Aceptar</button>
                     </div>
                   </div>
                 </div>
@@ -156,7 +153,6 @@
                   </i>
                 </a>
               </div>
-               <!-- Modal Huella-->
               <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content text-dark">
@@ -184,8 +180,7 @@
                   </div>
                 </div>
               </div>
-             
-  
+            
               <div class="col-4">
                 <label for="confirm_password">Voz:</label>
                 <a class="waves-effect waves-light text-dark btn p-2 text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop3"
@@ -194,8 +189,7 @@
                   
                   
                 </a>
-              </div>   
-                 <!-- Modal Voz-->
+              </div>  
               <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content text-dark">
@@ -225,7 +219,8 @@
               </div>          
             
                 
-            </div>
+            </div> -->
+
             <button class="btn btn-success btn-block">
               Registrarse
             </button>
@@ -234,7 +229,12 @@
         
               
         <p class="text-center">¿Ya tienes una cuenta?
-          <a href="/administradores/signin" class="text-info">Entrar</a></p>
+          <a href="/polls/signin" class="text-info">Entrar</a></p>
       </div>
-    </div>
-  </div>
+    </div> 
+
+ -
+
+
+
+ {% endblock %}

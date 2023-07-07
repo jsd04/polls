@@ -20,8 +20,13 @@ from . import views
 app_name = "polls"
 urlpatterns = [
   #  path("",views.loggin, name="shome"),
-    path("signup/",views.signup, name="signin"),
-    path("",views.IndexView.as_view(), name="shome"),
+    path("",views.IndexView.as_view(), name="home"),
+    path("signup/",views.signup, name="signup"),
+    path("signin/",views.signin, name="signin"),
+    path("logout/",views.signout,name="logout"),
+    path("about/",views.about, name="about"),
+    path("principal/",views.principal, name="principal"),
+    
    # path("administradores/signup/", views.inde, name="indexsig"),
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),

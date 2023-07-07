@@ -1,4 +1,7 @@
+<!-- -->
+{% extends "polls/base.html" %}
 
+{% block content %}
     <div>
         <header class="row" style="position:relative; height: 50vh; width:100%">
             <br>
@@ -28,9 +31,8 @@
                     <b>Administrador</b>
                 </h1>
                 <blockquote>
-                    <!--h4 class="black-text"-->
                         <p style="font-size: 30px;">Menú principal</p>
-                    <!--/h4-->
+                   
                 </blockquote>
             </div>
         </header>
@@ -51,7 +53,7 @@
             </div>
             <div class="col s12 m6 l6 xl6 align-self-center">
                 <div class="MenuActionContainer bg-danger p-2 text-center " style="--bs-bg-opacity: .5;">
-                    <i class="material-icons text-light bg-danger p-2 rounded-circle" style="center">group</i>
+                    <i class="material-icons text-light bg-danger p-2 rounded-circle" style="border-radius: 20px;">group</i>
                     <h5 class="text-black" style="font-family: 'Franklin Gothic Medium'" >
                         <strong>Visitantes</strong>
                     </h5>
@@ -92,7 +94,7 @@
                             <b>Cerrar sesion</b>
                         </h5>
                         <a class="waves-effect waves-light text-dark btn p-2 text-center" style="background:rgb(255, 255, 0);border-radius: 20px;" 
-                            href="/administradores/logout" style=""
+                            href="/polls/logout"
                         >
                             <i class="material-icons  text-dark large rounded-circle">logout
                             </i>
@@ -118,3 +120,5 @@
         
         </main>
     </div>
+
+{% endblock %}

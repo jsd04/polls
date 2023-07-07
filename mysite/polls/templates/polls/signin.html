@@ -1,3 +1,18 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
+ <h1>
+  {{mytitle}}
+ </h1> 
+ {{error}}
+  <!-- <form action="/polls/signin/" method="POST">
+    {% csrf_token %} 
+    {{form.as_p}}
+
+    <button>
+        resp
+    </button>
+</form> -->
 <div class="row">
   <div class="col-md-8 mx-auto">
     <div class="card mt-5 bg-info text-white rounded" style="--bs-bg-opacity: .7;">
@@ -12,19 +27,28 @@
         alt="Logo"
       />
       <div class="card-body">
-        <form action="/administradores/signin" method="POST">
+        <form action="/polls/signin/" method="POST">
+          {% csrf_token %} 
           <div class="mb-3">
-            <label for="email">Correo:</label>
+            <label for="username">Nombre:</label>
+            <input
+              type="text"
+              class="form-control bg-white text-dark "
+              name="username"
+              placeholder="Nombre Apellido Paterno Apellido Marterno"
+              autofocus
+            />
+             <!-- <label for="email">Correo:</label>
             <input
               type="email"
               class="form-control bg-white text-dark "
               name="email"
               placeholder="Correo"
               autofocus
-            />
+            />  -->
           </div>
           <div class="mb-3">
-            <label for="passswore">Password:</label>
+            <label for="password">Password:</label>
             <input
               type="password"
               class="form-control bg-white text-dark "
@@ -38,7 +62,8 @@
         </form>
       </div>
 
-      <p class="text-center">¿No tienes una cuenta? <a href="/administradores/signup" class="text-info">Registrar</a></p>
+      <p class="text-center">¿No tienes una cuenta? <a href="/polls/signup" class="text-info">Registrar</a></p>
     </div>
   </div>
 </div>
+{% endblock %}
