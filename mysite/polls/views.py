@@ -67,19 +67,13 @@ from django.contrib.auth.decorators import login_required
 from .models import Choice, Question
 
 
-class IndexView(generic.ListView):
-    template_name = "polls/index.html"
-    context_object_name = "latest_question_list"
-    def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[
-            :5
-        ]
-    """
-    """
+#Administrador e Index
+def index(request):
+     title='Index'
+     return render (request,"polls/index.html",{
+          'mytitle':title
+     })
+     
 def signup(request):
         if request.method == 'GET':
             print('enviando formulario')
@@ -135,22 +129,54 @@ def principal(request):
      return render (request,"polls/principal.html",{
           'mytitle':title
      })
-
-
 @login_required
 def signout(request):
      logout(request)
      return redirect('/polls/signin/')
-
 def about(request):
      title='About'
      return render (request,"polls/about.html",{
           'mytitle':title
      })
 
+#Inquilinos
+def inquilinosinicial(request):
+     title='Inquilinos Inicial'
+     return render (request,"polls/inquilinos/inquilinos_inicial_copy.html",{
+          'mytitle':title
+     })
+def inquilinos(request):
+     title='Inquilinos'
+    #  return render (request,"polls/inquilinos/all-inquilinos.html",{
+    #       'mytitle':title
+    #  })
+     
+# export const renderinquilinos = async (req, res) => {
+#   const inquilinos = await inquilino.find({ user: req.user.id })
+#     .sort({ date: "desc" })//ordenar datos de manera descendente
+#     .lean();
+#   res.render("inquilinos/all-inquilinos", { inquilinos });
+# };
+
      
 
 
+
+# GUIA
+class IndexView(generic.ListView):
+    template_name = "polls/index.html"
+    
+    context_object_name = "latest_question_list"
+    def get_queryset(self):
+        """
+        Return the last five published questions (not including those set to be
+        published in the future).
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[
+            :5
+        ]
+    """
+    """
 class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
