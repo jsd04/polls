@@ -9,19 +9,23 @@ from django.contrib import admin
 
 
 class UsuarioInquilo(models.Model):
-    username = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=30)
  #   user = models.ForeignKey(User)
     curp = models.CharField(max_length=30)
-     #domicilio
+     # domicilio
     piso = models.IntegerField()
      # type: Number,
     departamento = models.IntegerField()
      # type: Number,
-    telefono = models.IntegerField()
-     # type: String,
+    telefono = models.CharField(max_length=15)
+     # type: String, models.IntegerField()
     correo = models.CharField(max_length=30)
     #  type: String,
-    created = models.DateTimeField(auto_now_add=True)
+    creado = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nombre
+
 
 class UsuarioVisitante(models.Model):
     nombre = models.CharField(max_length=30)
@@ -53,10 +57,7 @@ class Question(models.Model):
     )
     def was_published_recently(self):
         now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
-  
-    
-    
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now   
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

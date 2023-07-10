@@ -147,9 +147,9 @@ def inquilinosinicial(request):
      })
 def inquilinos(request):
      title='Inquilinos'
-    #  return render (request,"polls/inquilinos/all-inquilinos.html",{
-    #       'mytitle':title
-    #  })
+     return render (request,"polls/inquilinos/all-inquilinos.html",{
+          'mytitle':title
+     })
      
 # export const renderinquilinos = async (req, res) => {
 #   const inquilinos = await inquilino.find({ user: req.user.id })

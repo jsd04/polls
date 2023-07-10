@@ -74,14 +74,12 @@
 
   <div class="row" style=" border: 0.5px solid rgb(1, 17, 135); margin: 25px 0px; background:rgb(144, 221, 227)">
     
-  {{#each inquilinos}}
 <!---->
   <div class="col-md-3">
     <br>
     <div class="card" style=" border: 0.3px solid rgb(64, 113, 247);  ">
       <div class="card-body ">
          <h3 class="d-flex p-2 flex-row-reverse">
-          <a href="/inquilinos/edit/{{_id}}"><i class="fas fa-edit"></i></a> 
          </h3>
          Inquilino:
         <h4 class="card-title ">
@@ -113,7 +111,7 @@
               </div>
         </div>
         <!-- DELETE REQUEST -->
-        <form action="/inquilinos/delete/{{_id}}?_method=DELETE" method="POST" class="btn">
+        <form action="" method="POST" class="btn">
           <input type="hidden" name="_method" value="DELETE">
           <button type="submit" class="btn btn-danger btn-block ">
             <span class="material-icons me-1">delete</span>
@@ -124,7 +122,6 @@
     </div>
     <br>
   </div>
-  {{else}}
   <div class="card mx-auto">
     <div class="card-body">
       <h1>Hola  👋 </h1>
@@ -132,6 +129,5 @@
       <a href="/inquilinos/add" class="btn btn-success btn-block">Crea un Inquilino!</a>
     </div>
   </div>
-  {{/each}}
 </div>
 </div>
