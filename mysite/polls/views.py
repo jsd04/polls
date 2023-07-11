@@ -1,58 +1,6 @@
-"""
-from django.shortcuts import render
-from django.http import Http404
-
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
-from django.template import loader
-
-from .models import Question,Choice
-
-
-def index(request):
-    latest_question_list = Question.objects.order_by("-pub_date")[:5]
-    context = {"latest_question_list": latest_question_list}
-    return render(request, "polls/index.html", context)
-
-# ...
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, "polls/detail.html", {"question": question})
-
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, "polls/results.html", {"question": question})
-
-
-# ...
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST["choice"])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(
-            request,
-            "polls/detail.html",
-            {
-                "question": question,
-                "error_message": "You didn't select a choice.",
-            },
-        )
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
-    
-    
-    """
 
 from django.http import HttpResponseRedirect,HttpResponse, Http404
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -64,7 +12,10 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 
-from .models import Choice, Question
+
+#from .models import Choice, Question, UsuarioInquilino
+from .models import Choice, Question, UsuarioInquilo
+from .forms import InquilinoForm
 
 
 #Administrador e Index
@@ -146,18 +97,71 @@ def inquilinosinicial(request):
           'mytitle':title
      })
 def inquilinos(request):
+     inquilinos = UsuarioInquilo.objects.all()
      title='Inquilinos'
      return render (request,"polls/inquilinos/all-inquilinos.html",{
-          'mytitle':title
+          'mytitle':title,
+          'inquilinos':inquilinos
      })
-     
-# export const renderinquilinos = async (req, res) => {
-#   const inquilinos = await inquilino.find({ user: req.user.id })
-#     .sort({ date: "desc" })//ordenar datos de manera descendente
-#     .lean();
-#   res.render("inquilinos/all-inquilinos", { inquilinos });
-# };
 
+def new_inquilino(request):
+     if request.method == "GET":
+        return render(request, 'polls/inquilinos/new-inquilino.html', {"form":  InquilinoForm})
+     else:
+        # print(request.POST)
+        # return render(request, 'polls/inquilinos/new-inquilino.html', {"form":  InquilinoForm})
+        try:
+            form = InquilinoForm(request.POST)
+            new_inquilino = form.save(commit=False)
+            new_inquilino.save()
+            return redirect('/polls/inquilinos/')
+        except ValueError:
+            return render(request, 'polls/inquilinos/new-inquilino.html', {"form":  InquilinoForm, "error": "Error creando el inquilino."})
+def search_inquilino(request,inquilino_para):
+     inquilino = get_object_or_404(UsuarioInquilo,pk=inquilino_para)
+    #  inquilinos = UsuarioInquilo.objects.filter(nombre='jessica sanchez pruebaF5')
+     title='search'
+     return render (request,"polls/inquilinos/search-inquilinos.html",{
+          'mytitle':title,
+          'inquilino':inquilino
+     })
+# export const searchInquilinos = async (req, res) => {
+#   //console.log('query -> ',req.query)
+#   if(req.query.buscar && req.query.piso && req.query.dep){
+#     console.log("buscar ", req.query.buscar)
+#     console.log("piso ", req.query.piso)
+#     console.log("dep ", req.query.dep)
+#     const inquilinosFound = await Inquilino.find(
+#       { $and: [ {nombre:{ $regex:  req.query.buscar, $options:"$i"}},
+#        {piso:{$eq:req.query.piso}}, {departamento:{$eq:req.query.dep}} ]} )
+#     //.sort({ date: "desc" })}
+#      // {nombre:{ $regex: req.query.buscar, $options:"$i"}})
+#     /* ***************** regex y options **************
+#       Usa $ regex operador como una expresión regular para encontrar patrones en una cadena.
+#       Para distinguir entre mayúsculas y minúsculas, las expresiones regulares utilizan 
+#       $ opción y el parámetro con un valor de $ i */
+
+#       //const inquilinosFound = await Inquilino.find({nombre:{ $eq: req.query.buscar}})
+#     .sort({ date: "desc" })
+#       .lean();
+#       console.log('El Inquilino que coincidio es :   ', inquilinosFound)
+#       res.render("inquilinos/search-inquilinos",{ inquilinosFound })
+#   }
+#   else if(req.query.buscar && req.query.piso){
+#     console.log("buscar2 ", req.query.buscar)
+#     console.log("piso2 ", req.query.piso)
+#     console.log("dep2 ", req.query.dep)
+#     const inquilinosFound = await Inquilino.find( { $and: [ {nombre:{ $regex:  req.query.buscar, $options:"$i"}}, {piso:{$eq:req.query.piso}} ]})
+#     .sort({ date: "desc" })
+#       .lean();
+#       console.log('El Inquilino que coincidio es :   ', inquilinosFound)
+#       res.render("inquilinos/search-inquilinos",{ inquilinosFound })
+#   }
+#   else{
+#     console.log("no hay parametro")
+#     res.render("inquilinos/search-inquilinos")
+#   }
+# }        
      
 
 

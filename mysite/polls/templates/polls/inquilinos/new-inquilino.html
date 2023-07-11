@@ -1,4 +1,7 @@
 
+{% extends "polls/base.html" %}
+
+{% block content %}
     <header class="row" style="position: relative;  height: 50vh; width: 100%;" >
         <div
           class="col s12 m11 l9 xl8 "
@@ -45,14 +48,15 @@
           </a>
         </div>
       </div>
-
+      {{error}}
     <div class="col-md-4 mx-auto">
       <div class="card">
         <div class="card-header bg-info text-center" style="--bs-bg-opacity: .7;">
           <h3 class="text-white">Nuevo inquilino</h3>
         </div>
         <div class="card-body text-left bg-info p-2" style="--bs-bg-opacity: .3;">
-          <form action="/inquilinos/new-inquilino" method="POST" enctype="multipart/form-data">
+          <form action="/polls/new_inquilino/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
             <div class="mb-3">
               <label for="nombre">Nombre:</label>
               <input
@@ -120,7 +124,6 @@
                   >
                   <i class="material-icons small rounded-circle " style="font-size:90px;"> 📷 
                   </i> 
-                  <!-- photo_camera -->                     
                 </a> 
                 <div class="col">
                   
@@ -137,17 +140,13 @@
                       <div id="my_camera"></div>
                       <br>
                       <div class="d-flex justify-content-center">
-                       <!-- -->
                        <button type="button" class="btn btn-primary" onclick="takeSnapshotAndSend()">Capturar</button> 
                       </div>
                       <br>
-                      <!-- 
-                      <input type=button value="Take Snapshot" onClick="take_snapshot()">  
-                      -->
+                      
                       <div id="results" ></div>
                         <br>
                         <input type="text"  id="cara" name ="cara" />
-                         <!-- document.getElementById("results").value-->
                      <script language="JavaScript">
                        Webcam.set({
                             width: 320, 
@@ -204,7 +203,6 @@
                   >
                   <i class="material-icons small rounded-circle " style="font-size:90px;"> 📷 
                   </i> 
-                  <!-- photo_camera -->                     
                 </a> 
              </div>
               <div class="col-4">
@@ -236,4 +234,6 @@
         </div>
       </div>
     </div>
+
+{% endblock %}
  

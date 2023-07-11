@@ -1,3 +1,6 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
 
     <header class="row" style="position: relative; height: 50vh; width: 100%;">
         <div
@@ -63,7 +66,7 @@
     <div class="row justify-content-end">
       <div class="col-3 align-self-center">
         <a class="btn btn-outline-info text-center" style=" background-image: var(--bs-gradient);border-radius: 20px;"
-           href="/inquilinos/add" style=""
+           href="/polls/new_inquilino"  style=""
         >
           <p style="font-family: 'Franklin Gothic Medium'" >
             Añadir inquilino <i class="material-icons rounded-circle ">person_add</i>
@@ -75,6 +78,7 @@
   <div class="row" style=" border: 0.5px solid rgb(1, 17, 135); margin: 25px 0px; background:rgb(144, 221, 227)">
     
 <!---->
+{% for inquilino in inquilinos %}
   <div class="col-md-3">
     <br>
     <div class="card" style=" border: 0.3px solid rgb(64, 113, 247);  ">
@@ -83,13 +87,13 @@
          </h3>
          Inquilino:
         <h4 class="card-title ">
-         {{ nombre }}
+         {{ inquilino.nombre }}
         </h4>
-        <p>Curp: {{ curp }} </p>
-        <p>No. Piso: {{ piso }} </p>
-        <p>No. Departamento: {{ departamento }} </p>
-        <p>No. Teléfono: {{ telefono }} </p>
-        <p>Correo: {{ correo }} </p>
+        <p>Curp: {{ inquilino.curp }} </p>
+        <p>No. Piso: {{ inquilino.piso }} </p>
+        <p>No. Departamento: {{ inquilino.departamento }} </p>
+        <p>No. Teléfono: {{ inquilino.telefono }} </p>
+        <p>Correo: {{ inquilino.correo }} </p>
         <h1>Datos Biométricos</h1>
         <div class="container p-2">
              <div class="row">
@@ -122,12 +126,15 @@
     </div>
     <br>
   </div>
+{% endfor %}
   <div class="card mx-auto">
     <div class="card-body">
       <h1>Hola  👋 </h1>
       <p clsss="lead">No hay inquilinos.</p>
-      <a href="/inquilinos/add" class="btn btn-success btn-block">Crea un Inquilino!</a>
+      <a  href="/polls/new_inquilino" class="btn btn-success btn-block">Crea un Inquilino!</a>
     </div>
   </div>
 </div>
 </div>
+
+{% endblock %} 

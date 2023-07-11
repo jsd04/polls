@@ -15,7 +15,9 @@ urlpatterns = [
     #Inquilinos
     path("inquilinosinicial/", views.inquilinosinicial, name="inquilinosinicial"),
     path("inquilinos/",views.inquilinos, name="inquilinos"),
-    
+    path("new_inquilino/",views.new_inquilino, name="new_inquilino"),
+    path("search_inquilino/<int:inquilino_para>",views.search_inquilino, name="search_inquilino"),
+
     
 
     #Visitantes

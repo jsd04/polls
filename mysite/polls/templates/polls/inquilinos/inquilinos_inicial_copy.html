@@ -1,4 +1,7 @@
 
+{% extends "polls/base.html" %}
+
+{% block content %}
 <main style="position: relative; overflow: hidden; width: 100%; max-width: 1600px; margin: auto; min-height: 100vh;">
     <img src="/img/partebaa3.png" alt="" 
         style="position: absolute; width: 1016px; height: 300px; top: 0px; right: 600px; z-index: -1;"
@@ -64,7 +67,7 @@
             <br>información básica del inquilino nuevo, así como los datos biométricos... 
             </p>
             <a class="waves-effect waves-light text-white btn p-2 text-center " style ="background:rgb(6, 127, 202);border-radius: 20px;"
-                href="/inquilinos/add" 
+                href="/polls/new_inquilino" 
             >
                 Añadir
                 <i class="material-icons text-white rounded-circlet btn p-2 text-center ">add</i>
@@ -80,7 +83,7 @@
            </h5>
             <p class="textHeight">Aquí puedes buscar un inquilino y ver su información.</p>
             <a class="waves-effect waves-light text-white btn p-2 text-center  " style="background: rgb(6, 127, 202);border-radius: 20px;"
-                href="/inquilinos/search-inquilinos" 
+            href="/polls/search_inquilino" 
             >
                 Buscar
                 <i class="material-icons  text-white large rounded-circle btn p-2 text-center">person_search
@@ -119,3 +122,4 @@
     >
   
 </main>
+{% endblock %}

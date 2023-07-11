@@ -1,4 +1,8 @@
 
+{% extends "polls/base.html" %}
+
+{% block content %}
+
     <header class="row" style="position: relative; height: 50vh; width: 100%;">
         <div
               class="col s12 m11 l9 xl8 "
@@ -78,43 +82,35 @@
           Las coincidencias son:
         </h3>
       </div>
-  {{#each inquilinosFound}}
 
   <div class="col-md-3">
     <br>
     <div class="card">
       <div class="card-body">
          <h3 class="d-flex flex-row-reverse">
-          <a href="/inquilinos/edit/{{_id}}"><i class="fas fa-edit"></i></a> 
-         </h3>
+
+        </h3>
          Inquilino:
         <h4 class="card-title d-flex justify-content-between align-items-center">
           
-         {{ nombre }}
+         {{ inquilino.nombre }}
         </h4>
         <p>Curp: {{ curp }} </p>
         <p>No. Piso: {{ piso }} </p>
         <p>No. Departamento: {{ departamento }} </p>
         <p>No. Teléfono: {{ telefono }} </p>
         <p>Correo: {{ correo }} </p>
-        <!-- DELETE REQUEST -->
-        <form action="/inquilinos/delete/{{_id}}?_method=DELETE" method="POST"class="btn">
-          <input type="hidden" name="_method" value="DELETE">
-          <button type="submit" class="btn btn-danger btn-block">
-            <span class="material-icons me-1">delete</span>
-            Eliminar
-            </button>
-        </form>
+        
       </div>
     </div>
     <br>
   </div>
-  {{else}}
   <div class="card mx-auto">
     <div class="card-body">
       <p clsss="lead">No hay ninguna coincidencia con los inquilinos registrados.</p>
     </div>
   </div>
-  {{/each}}
 </div>
 </div>
+
+{% endblock %}
