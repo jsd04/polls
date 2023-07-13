@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q
 
 #from .models import Choice, Question, UsuarioInquilino
 from .models import Choice, Question, UsuarioInquilo
@@ -117,14 +117,54 @@ def new_inquilino(request):
             return redirect('/polls/inquilinos/')
         except ValueError:
             return render(request, 'polls/inquilinos/new-inquilino.html', {"form":  InquilinoForm, "error": "Error creando el inquilino."})
-def search_inquilino(request,inquilino_para):
-     inquilino = get_object_or_404(UsuarioInquilo,pk=inquilino_para)
+def search_inquilino(request):
+     busqueda = request.POST.get("buscar")
+     print('nusqueda es ',busqueda)
+     nombre = request.POST.get("nombre")
+     print('nombre es ',nombre)
+     piso = request.POST.get("piso")
+     print('npiso es ',piso)
+     departamento = request.POST.get("departamento")
+     print('ndepartamento es ',departamento)
+     inquilinos = UsuarioInquilo.objects.all()
+     if busqueda:
+        inquilinos = UsuarioInquilo.objects.filter(
+            Q(piso__icontains = busqueda) | 
+            Q(nombre__icontains = busqueda) |
+            Q(curp__icontains = busqueda) |
+            Q(departamento__icontains = busqueda)
+        ).distinct()  
+     if nombre:
+        inquilinos = UsuarioInquilo.objects.filter(
+            Q(nombre__icontains = nombre) 
+        ).distinct()  
+        print('nombre des ',nombre)
+     if piso:
+        inquilinos = UsuarioInquilo.objects.filter(
+            Q(piso__icontains = piso) 
+        ).distinct() 
+        print('npiso des ',piso) 
+     if departamento:
+        inquilinos = UsuarioInquilo.objects.filter(
+            Q(departamento__icontains = departamento)
+        ).distinct() 
+        print('ndepartamento des ',departamento)
+        print('inquilino es ',inquilinos)
+    # inquilino = get_object_or_404(UsuarioInquilo,pk=inquilino_para)
     #  inquilinos = UsuarioInquilo.objects.filter(nombre='jessica sanchez pruebaF5')
      title='search'
-     return render (request,"polls/inquilinos/search-inquilinos.html",{
+     return render (request,"polls/inquilinos/s-inquilinos.html",{
           'mytitle':title,
-          'inquilino':inquilino
+          'inquilinos':inquilinos
      })
+# def search_inquilino(request,inquilino_para):
+#      inquilino = get_object_or_404(UsuarioInquilo,pk=inquilino_para)
+#     #  inquilinos = UsuarioInquilo.objects.filter(nombre='jessica sanchez pruebaF5')
+#      title='search'
+#      return render (request,"polls/inquilinos/search-inquilinos.html",{
+#           'mytitle':title,
+#           'inquilino':inquilino
+#      })
 # export const searchInquilinos = async (req, res) => {
 #   //console.log('query -> ',req.query)
 #   if(req.query.buscar && req.query.piso && req.query.dep){

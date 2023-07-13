@@ -43,74 +43,113 @@
       <div class="row justify-content-end">
         <div class="col-3 align-self-end">
           <a class="waves-effect waves-light text-white btn p-2 text-center  " style="background: rgb(29, 240, 134);border-radius: 20px;"
-                    href="javascript:window.history.back(); " style=""
+                    href="javascript:window.history.back(); "
                 > 
             <i class="material-icons  text-white large rounded-circle btn p-2 text-center">arrow_back
             </i>       Regresar              
           </a>
         </div>
       </div>
-  <div class="container p-5">
-    <div class="row justify-content-center" >
-      <div class="col-8 align-self-center" >
-         <div class="container-fluid text-left bg-info p-2" style="--bs-bg-opacity: .5;">
-          <form class="d-flex " action="/inquilinos/search-inquilinos" method="GET" >
-            <input class="form-control " style=" border: 0.5px solid rgb(61, 101, 213);" 
-              type="text" name="buscar" placeholder="Nombre" aria-label="Search">
+    <div class="container p-5">
+      <div class="row justify-content-center" >
+        <div class="col-8 align-self-center" >
+          <div class="container-fluid text-left bg-info p-2" style="--bs-bg-opacity: .5;">
+          <!--  <form class="d-flex " action="/polls/search_inquilino" method="POST" >
+                {% csrf_token %} 
+              <input class="form-control " style=" border: 0.5px solid rgb(61, 101, 213);" 
+                type="text" name="buscar" placeholder="Buscar" aria-label="Search" value="{{ request.POST.buscar }}">
+              
+              <input class="form-control " style=" border: 0.5px solid rgb(61, 101, 213);" 
+                type="text" name="piso" placeholder="Piso" aria-label="Search">
             
-            <input class="form-control " style=" border: 0.5px solid rgb(61, 101, 213);" 
-              type="text" name="piso" placeholder="Piso" aria-label="Search">
-          
-            <input class="form-control " style=" border: 0.5px solid rgb(61, 101, 213);" 
-              type="text" name="dep" placeholder="Departamento" aria-label="Departamento">
-            
-            <button class="btn btn-success" type="submit">
-              <span class="material-symbols-rounded">
-                search
-              </span>
-            </button>
-          </form>
+              <input class="form-control " style=" border: 0.5px solid rgb(61, 101, 213);" 
+                type="text" name="dep" placeholder="Departamento" aria-label="Departamento">
+              
+              <button class="btn btn-success" type="submit">
+                <span class="material-symbols-rounded">
+                  search
+                </span>
+              </button>
+            </form> -->
+            <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+              method="POST">
+              {% csrf_token %}
+              <div class="input-group">
+                <input type="text" class="form-control bg-light border-1 small solid rgb(61, 101, 213)" placeholder="Buscar" name="buscar" value="{{ request.POST.buscar }}"> -->
+                <!-- <input type="text" class="form-control bg-light border-1 small solid rgb(61, 101, 213)" placeholder="Nombre" name="nombre" value="{{ request.POST.nombre }}">
+                <input type="text" class="form-control bg-light border-3 small solid rgb(61, 101, 213)" placeholder="Correo" name="correo" value="{{ request.POST.correo }}" >
+                <input type="text" class="form-control bg-light border-3 small solid rgb(61, 101, 213)" placeholder="Curp" name="curp" value="{{ request.POST.curp }}" >
+                -->
+                <!-- <div class="input-group-append">
+                  <button class="btn btn-success" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                  </button> -->
+                  <!-- <button class="btn btn-success" type="submit">
+                    <span class="material-symbols-rounded">
+                      search
+                    </span>
+                  </button>                                       
+                </div>
+              </div>
+            </form>--> 
+          </div>                      
         </div>
       </div>
-      
-    </div> 
-           
-
-  <div class="row bg-success" style=" border: 0.5px solid rgb(147, 250, 118); margin: 25px 0px; --bs-bg-opacity:.5">
-    <div class="container text-center pt-5" style="font-family: 'Franklin Gothic Medium'">
-        <h3 class=" text-white">
-          Las coincidencias son:
-        </h3>
+      <div class="row bg-success" style=" border: 0.5px solid rgb(147, 250, 118); margin: 25px 0px; --bs-bg-opacity:.5">
+        <div class="container text-center pt-5" style="font-family: 'Franklin Gothic Medium'">
+            <h3 class=" text-white">
+              Las coincidencias son:
+            </h3>
+        </div>
+        <!-- {% if inquilino %} -->
+        {% for inquilino in inquilinos %}
+          <div class="col-md-3">
+            <br>
+            <div class="card" style=" border: 0.3px solid rgb(64, 113, 247); ">
+              <div>
+                <h3 class="d-flex p-2 flex-row-reverse">
+                </h3>
+                Inquilino:
+                <h4 class="card-title ">
+                  {{ inquilino.nombre }}
+                </h4>
+                <p>Curp: {{ inquilino.curp }} </p>
+                <p>No. Piso: {{ inquilino.piso }} </p>
+                <p>No. Departamento: {{ inquilino.departamento }} </p>
+                <p>No. Teléfono: {{ inquilino.telefono }} </p>
+                <p>Correo: {{ inquilino.correo }} </p>
+                <h1>Datos Biométricos</h1>
+                <!-- DELETE REQUEST -->
+                <form action="" method="POST" class="btn">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button type="submit" class="btn btn-danger btn-block ">
+                    <span class="material-icons me-1">delete</span>
+                    Eliminar
+                  </button>
+                </form>
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+        {% endfor %}
+        <!-- {% else %} -->
+        <h1>NO HAY CLIENTES REGISTRADOS</h1>
+    
+        <div class="card mx-auto">
+          <div class="card-body">
+            <p clsss="lead">No hay ninguna coincidencia con los inquilinos registrados.</p>
+          </div>
+        </div> 
+        <!-- {% endif %} -->
+    
       </div>
-
-  <div class="col-md-3">
-    <br>
-    <div class="card">
-      <div class="card-body">
-         <h3 class="d-flex flex-row-reverse">
-
-        </h3>
-         Inquilino:
-        <h4 class="card-title d-flex justify-content-between align-items-center">
+    </div>
           
-         {{ inquilino.nombre }}
-        </h4>
-        <p>Curp: {{ curp }} </p>
-        <p>No. Piso: {{ piso }} </p>
-        <p>No. Departamento: {{ departamento }} </p>
-        <p>No. Teléfono: {{ telefono }} </p>
-        <p>Correo: {{ correo }} </p>
-        
-      </div>
-    </div>
-    <br>
-  </div>
-  <div class="card mx-auto">
-    <div class="card-body">
-      <p clsss="lead">No hay ninguna coincidencia con los inquilinos registrados.</p>
-    </div>
-  </div>
-</div>
-</div>
+
+  
+           
+   
+<!---->
 
 {% endblock %}
