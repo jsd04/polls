@@ -157,52 +157,13 @@ def search_inquilino(request):
           'mytitle':title,
           'inquilinos':inquilinos
      })
-# def search_inquilino(request,inquilino_para):
-#      inquilino = get_object_or_404(UsuarioInquilo,pk=inquilino_para)
-#     #  inquilinos = UsuarioInquilo.objects.filter(nombre='jessica sanchez pruebaF5')
-#      title='search'
-#      return render (request,"polls/inquilinos/search-inquilinos.html",{
-#           'mytitle':title,
-#           'inquilino':inquilino
-#      })
-# export const searchInquilinos = async (req, res) => {
-#   //console.log('query -> ',req.query)
-#   if(req.query.buscar && req.query.piso && req.query.dep){
-#     console.log("buscar ", req.query.buscar)
-#     console.log("piso ", req.query.piso)
-#     console.log("dep ", req.query.dep)
-#     const inquilinosFound = await Inquilino.find(
-#       { $and: [ {nombre:{ $regex:  req.query.buscar, $options:"$i"}},
-#        {piso:{$eq:req.query.piso}}, {departamento:{$eq:req.query.dep}} ]} )
-#     //.sort({ date: "desc" })}
-#      // {nombre:{ $regex: req.query.buscar, $options:"$i"}})
-#     /* ***************** regex y options **************
-#       Usa $ regex operador como una expresión regular para encontrar patrones en una cadena.
-#       Para distinguir entre mayúsculas y minúsculas, las expresiones regulares utilizan 
-#       $ opción y el parámetro con un valor de $ i */
+#       
 
-#       //const inquilinosFound = await Inquilino.find({nombre:{ $eq: req.query.buscar}})
-#     .sort({ date: "desc" })
-#       .lean();
-#       console.log('El Inquilino que coincidio es :   ', inquilinosFound)
-#       res.render("inquilinos/search-inquilinos",{ inquilinosFound })
-#   }
-#   else if(req.query.buscar && req.query.piso){
-#     console.log("buscar2 ", req.query.buscar)
-#     console.log("piso2 ", req.query.piso)
-#     console.log("dep2 ", req.query.dep)
-#     const inquilinosFound = await Inquilino.find( { $and: [ {nombre:{ $regex:  req.query.buscar, $options:"$i"}}, {piso:{$eq:req.query.piso}} ]})
-#     .sort({ date: "desc" })
-#       .lean();
-#       console.log('El Inquilino que coincidio es :   ', inquilinosFound)
-#       res.render("inquilinos/search-inquilinos",{ inquilinosFound })
-#   }
-#   else{
-#     console.log("no hay parametro")
-#     res.render("inquilinos/search-inquilinos")
-#   }
-# }        
-     
+def delete_inquilino(request, inquilino_id):
+    inquilino = get_object_or_404(UsuarioInquilo, pk=inquilino_id)
+    if request.method == 'POST':
+        inquilino.delete()
+        return redirect('polls/inquilinos/')
 
 
 
@@ -235,8 +196,6 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
-
-
 class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
@@ -246,8 +205,6 @@ class ResultsView(generic.DetailView):
         question = get_object_or_404(Question, pk=question_id)
         return render(request, "polls/results.html", {"question": question},HttpResponse(response % question_id))
      """    
-
-
 def vote(request, question_id):
     ...  # same as above, no changes needed.
     question = get_object_or_404(Question, pk=question_id)

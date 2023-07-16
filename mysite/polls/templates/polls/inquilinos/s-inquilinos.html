@@ -121,7 +121,7 @@ style="position: absolute; top: 50%; left: 30%; height: 100%; transform: transla
                   </div>
             </div>
             <!-- DELETE REQUEST -->
-            <form action="" method="POST" class="btn">
+            <form action="{% url 'polls:delete_inquilino' inquilino_id %}" method="POST" >
               <input type="hidden" name="_method" value="DELETE">
               <button type="submit" class="btn btn-danger btn-block ">
                 <span class="material-icons me-1">delete</span>
